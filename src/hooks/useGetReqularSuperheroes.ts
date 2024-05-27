@@ -11,14 +11,14 @@ export type FetchSuperHeroes = {
   status: number;
   statusText: string;
 };
-interface FetchStatusState {
+export interface FetchStatusState {
   isLoading: boolean;
-  isErro: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 const InitialFetchStatusState: FetchStatusState = {
   isLoading: false,
-  isErro: false,
+  isError: false,
   errorMessage: "",
 };
 
@@ -28,26 +28,29 @@ export const useGetReqularSuperheros = () => {
     InitialFetchStatusState
   );
   const getSuperheroes = async () => {
+    setSuperheroes([]);
     setFetchStatus({ ...InitialFetchStatusState, isLoading: true });
     try {
-      const { data, status, statusText }: FetchSuperHeroes = await axios.get(
-        "http://localhost:1313/superheroes"
-      );
-      console.log(status);
-      console.log(statusText);
-      setSuperheroes(data);
-      setFetchStatus(InitialFetchStatusState);
+      setTimeout(async () => {
+        const { data, status, statusText }: FetchSuperHeroes = await axios.get(
+          "http://localhost:1313/superheroes"
+        );
+        console.log(status);
+        console.log(statusText);
+        setSuperheroes(data);
+        setFetchStatus(InitialFetchStatusState);
+      }, 2000);
     } catch (error) {
       if (error instanceof Error) {
         setFetchStatus({
           isLoading: false,
-          isErro: true,
+          isError: true,
           errorMessage: error.message,
         });
       } else {
         setFetchStatus({
           isLoading: false,
-          isErro: true,
+          isError: true,
           errorMessage: "Error happend, try again",
         });
       }
