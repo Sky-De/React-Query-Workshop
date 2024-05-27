@@ -1,0 +1,13 @@
+// header------
+header {
+  a {
+    transition: opacity 0.3s linear;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+main {
+  padding: 0 1rem;
+}
