@@ -5,6 +5,7 @@ import {
 } from "../hooks/useGetReqularSuperheroes";
 import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 type SuperHeroListProps = {
   fetchStatus: FetchStatusState;
@@ -24,7 +25,7 @@ const SuperHeroList: FC<SuperHeroListProps> = ({
       {superheroes.length > 0 &&
         superheroes.map((hero) => (
           <li key={hero.id}>
-            {hero.name} : {hero.alterEgo}
+            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
           </li>
         ))}
     </ul>

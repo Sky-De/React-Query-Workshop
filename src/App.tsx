@@ -7,6 +7,7 @@ import SuperHeroes from "./pages/SuperHeroes";
 import Header from "./components/layout/Header";
 import NotFound from "./components/NotFound";
 import "./App.scss";
+import SuperHeroDetails from "./pages/SuperHeroDetails";
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +20,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/super-heroes" element={<SuperHeroes />} />
             <Route path="/rq-super-heroes" element={<RQSuperHeroes />} />
+            <Route
+              path="/rq-super-heroes/:heroId"
+              element={<SuperHeroDetails />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
