@@ -3,15 +3,18 @@ import { SuperHeroes } from "./useGetReqularSuperheroes";
 import axios from "axios";
 
 const fetchSuperHeroes = () => axios.get("http://localhost:1313/superheroes");
-const onSuccess = (data: { data: SuperHeroes }) =>
-  console.log("Perform side effect after data fetching", data.data);
+const onSuccess = (data: SuperHeroes) =>
+  console.log("Perform side effect after data fetching", data);
 const onError = (error: Error) =>
   console.log("Perform side effect after encountering error", error);
 
 export const useGetRQSuperheroes = () => {
   const { data, isLoading, isError, refetch, error } = useQuery<
-    { data: SuperHeroes },
-    Error
+    {
+      data: SuperHeroes;
+    },
+    Error,
+    SuperHeroes
   >("super-heroes", fetchSuperHeroes, {
     // // 1 - default 5min
     // cacheTime: 5000,
@@ -25,8 +28,8 @@ export const useGetRQSuperheroes = () => {
     // // 5 - while browser is not in focus it will continue
     // refetchIntervalInBackground: true,
     // // 6 - Performs side effects base on res status
-    // onSuccess,
-    // onError,
+    onSuccess,
+    onError,
     // // 7 - default staleTime: 0
     // // with staleTime keeps query fresh which means
     // // until that time pass it will not refetch
@@ -35,9 +38,15 @@ export const useGetRQSuperheroes = () => {
     // // 8 - default enabled = true
     // // with enabled false it prevents fetching on component mount
     // // then we need to use refetch along with an event to fetch data
-    enabled: false,
+    // enabled: false,
+    // // select data - it transforms data to the form that we want
+    // // we can map it - filter it - change the name or ... then return it
+    select: (data) => {
+      const superheroes = data?.data;
+      return superheroes;
+    },
   });
-  const superheroes = data?.data || [];
+  const superheroes = data || [];
   const fetchStatus = {
     isError,
     isLoading,
