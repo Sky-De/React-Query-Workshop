@@ -13,6 +13,8 @@ export const useGetRQSuperheroes = () => {
     { data: SuperHeroes },
     Error
   >("super-heroes", fetchSuperHeroes, {
+    // // default 5min
+    // cacheTime: 5000,
     // // default true
     // refetchOnMount: true,
     // // default true
@@ -23,8 +25,13 @@ export const useGetRQSuperheroes = () => {
     // // while browser is not in focus it will continue
     // refetchIntervalInBackground: true,
     // // Performs side effects base on res status
-    onSuccess,
-    onError,
+    // onSuccess,
+    // onError,
+    // // default staleTime: 0
+    // // with staleTime keeps query fresh which means
+    // // until that time pass it will not refetch
+    // // this is way to reduce the number network requests
+    staleTime: 30000,
   });
   const superheroes = data?.data || [];
   const fetchStatus = {
