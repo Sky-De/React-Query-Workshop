@@ -13,25 +13,29 @@ export const useGetRQSuperheroes = () => {
     { data: SuperHeroes },
     Error
   >("super-heroes", fetchSuperHeroes, {
-    // // default 5min
+    // // 1 - default 5min
     // cacheTime: 5000,
-    // // default true
+    // // 2 - default true
     // refetchOnMount: true,
-    // // default true
+    // // 3 - default true
     // refetchOnWindowFocus: "always",
-    // // polling (refetchInterval) - default false
+    // // 4 - polling (refetchInterval) - default false
     // // while browser is not in focus it will stop
     // refetchInterval: 1000,
-    // // while browser is not in focus it will continue
+    // // 5 - while browser is not in focus it will continue
     // refetchIntervalInBackground: true,
-    // // Performs side effects base on res status
+    // // 6 - Performs side effects base on res status
     // onSuccess,
     // onError,
-    // // default staleTime: 0
+    // // 7 - default staleTime: 0
     // // with staleTime keeps query fresh which means
     // // until that time pass it will not refetch
     // // this is way to reduce the number network requests
-    staleTime: 30000,
+    // staleTime: 30000,
+    // // 8 - default enabled = true
+    // // with enabled false it prevents fetching on component mount
+    // // then we need to use refetch along with an event to fetch data
+    enabled: false,
   });
   const superheroes = data?.data || [];
   const fetchStatus = {
