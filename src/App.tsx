@@ -8,6 +8,7 @@ import Header from "./components/layout/Header";
 import NotFound from "./components/NotFound";
 import "./App.scss";
 import SuperHeroDetails from "./pages/SuperHeroDetails";
+import ParallelRQ from "./pages/ParallelRQ";
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/super-heroes" element={<SuperHeroes />} />
+            <Route path="/rq-parallel" element={<ParallelRQ />} />
             <Route path="/rq-super-heroes" element={<RQSuperHeroes />} />
             <Route
               path="/rq-super-heroes/:heroId"
