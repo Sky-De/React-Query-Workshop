@@ -10,6 +10,7 @@ import "./App.scss";
 import SuperHeroDetails from "./pages/SuperHeroDetails";
 import ParallelRQ from "./pages/ParallelRQ";
 import DependedQueries from "./pages/DependedQueries";
+import PaginatedColors from "./pages/PaginatedColors";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/super-heroes" element={<SuperHeroes />} />
+            <Route path="/paginated-colors" element={<PaginatedColors />} />
             <Route path="/rq-parallel" element={<ParallelRQ />} />
             <Route
               path="/depended-queries"

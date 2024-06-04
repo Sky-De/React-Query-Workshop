@@ -22,6 +22,9 @@ const Header: FC = () => {
           <li>
             <Link to="/depended-queries">Depended-Queries</Link>
           </li>
+          <li>
+            <Link to="/paginated-colors">Paginated-Colors</Link>
+          </li>
         </ul>
       </nav>
     </header>
