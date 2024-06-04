@@ -9,6 +9,7 @@ import NotFound from "./components/NotFound";
 import "./App.scss";
 import SuperHeroDetails from "./pages/SuperHeroDetails";
 import ParallelRQ from "./pages/ParallelRQ";
+import DependedQueries from "./pages/DependedQueries";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/super-heroes" element={<SuperHeroes />} />
             <Route path="/rq-parallel" element={<ParallelRQ />} />
+            <Route
+              path="/depended-queries"
+              element={<DependedQueries email="sky@example.com" />}
+            />
             <Route path="/rq-super-heroes" element={<RQSuperHeroes />} />
             <Route
               path="/rq-super-heroes/:heroId"

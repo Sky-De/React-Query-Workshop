@@ -19,6 +19,9 @@ const Header: FC = () => {
           <li>
             <Link to="/rq-parallel">RQ-Parallel</Link>
           </li>
+          <li>
+            <Link to="/depended-queries">Depended-Queries</Link>
+          </li>
         </ul>
       </nav>
     </header>
