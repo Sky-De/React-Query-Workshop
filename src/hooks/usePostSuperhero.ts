@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 interface Hero {
   name: string;
   alterEgo: string;
@@ -20,7 +20,12 @@ const addSuperhero = (hero: Hero) => {
 
 export const usePostSuperhero = () => {
   const [newHero, setNewHero] = useState<NewHeroType>(initialNewHero);
-  const { mutate: addHero, ...restMutaionRes } = useMutation(addSuperhero);
+  const queryClient = useQueryClient();
+  const { mutate: addHero, ...restMutaionRes } = useMutation(addSuperhero, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("super-heroes");
+    },
+  });
 
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
