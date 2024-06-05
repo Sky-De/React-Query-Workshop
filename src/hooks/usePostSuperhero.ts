@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { request } from "../utils/axiosUtils";
 interface Hero {
   name: string;
   alterEgo: string;
@@ -14,8 +15,11 @@ const initialNewHero: NewHeroType = {
   name: "",
 };
 
+// const addSuperhero = (hero: Hero) => {
+//   return axios.post("http://localhost:1313/superheroes", hero);
+// };
 const addSuperhero = (hero: Hero) => {
-  return axios.post("http://localhost:1313/superheroes", hero);
+  return request({ url: "/superheroes", method: "post", data: hero });
 };
 
 export const usePostSuperhero = () => {

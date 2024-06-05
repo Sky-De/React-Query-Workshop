@@ -1,8 +1,10 @@
 import { useQuery } from "react-query";
 import { SuperHeroes } from "./useGetReqularSuperheroes";
-import axios from "axios";
+// import axios from "axios";
+import { request } from "../utils/axiosUtils";
 
-const fetchSuperHeroes = () => axios.get("http://localhost:1313/superheroes");
+// const fetchSuperHeroes = () => axios.get("http://localhost:1313/superheroes");
+const fetchSuperHeroes = () => request({ url: "/superheroes" });
 const onSuccess = (data: SuperHeroes) =>
   console.log("Perform side effect after data fetching", data);
 const onError = (error: Error) =>
