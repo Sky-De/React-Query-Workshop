@@ -16,14 +16,30 @@ export interface PaginatedRes {
   prev: number | null;
 }
 
-const fetchColors = (pageNumber: number) =>
-  axios.get(`http://localhost:1313/colors?_page=${pageNumber}&_per_page=2`);
+const fetchColors = ({
+  pageNumber,
+  perPage,
+}: {
+  pageNumber: number;
+  perPage: number;
+}) =>
+  axios.get(
+    `http://localhost:1313/colors?_page=${pageNumber}&_per_page=${perPage}`
+  );
+type PaginatedProps = {
+  colorPerPage?: number;
+};
 
-export const usePaginatedColors = () => {
+export const usePaginatedColors = ({
+  colorPerPage = 2,
+}: PaginatedProps = {}) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [selectPerPage, setSelectPerPage] = useState<number>(colorPerPage);
+  console.log(selectPerPage);
+
   const useQueryResult = useQuery<{ data: PaginatedRes }>(
-    ["colors", pageNumber],
-    () => fetchColors(pageNumber)
+    ["colors", pageNumber, selectPerPage],
+    () => fetchColors({ pageNumber, perPage: selectPerPage })
   );
   console.log(useQueryResult.data?.data);
 
@@ -36,6 +52,9 @@ export const usePaginatedColors = () => {
     setPageNumber(pageNumber - 1);
   };
   const setPage = (selectedPage: number) => setPageNumber(selectedPage);
+
+  const setPerPage = (selectedPerPage: number) =>
+    setSelectPerPage(selectedPerPage);
   return {
     ...useQueryResult,
     pageNumber,
@@ -43,5 +62,7 @@ export const usePaginatedColors = () => {
     nextPage,
     prePage,
     setPage,
+    setPerPage,
+    selectPerPage,
   };
 };

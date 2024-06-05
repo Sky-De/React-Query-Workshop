@@ -26,6 +26,7 @@ const PaginationController = ({
         .fill(null)
         .map((_, index) => (
           <li
+            key={index}
             onClick={() => setPage(index + 1)}
             className={`cursor-pointer list-none ${
               pageNumber === index + 1 ? "text-blue-500" : ""
