@@ -22,8 +22,17 @@ export const usePostSuperhero = () => {
   const [newHero, setNewHero] = useState<NewHeroType>(initialNewHero);
   const queryClient = useQueryClient();
   const { mutate: addHero, ...restMutaionRes } = useMutation(addSuperhero, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("super-heroes");
+    onSuccess: (data) => {
+      // queryClient.invalidateQueries("super-heroes");
+      // // updating existing cached query data without
+      // // additional network request using queryClient.setQueryData and
+      // // returned new hero obj by mutate
+      queryClient.setQueryData("super-heroes", (oldQueryData) => {
+        return {
+          ...oldQueryData,
+          data: [...oldQueryData.data, data.data],
+        };
+      });
     },
   });
 

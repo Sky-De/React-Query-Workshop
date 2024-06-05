@@ -14,6 +14,11 @@
       "id": "3",
       "name": "Wonder Woman",
       "alterEgo": "Princess Diana"
+    },
+    {
+      "id": "cc95",
+      "alterEgo": "dfsd",
+      "name": "dsf"
     }
   ],
   "friends": [
@@ -39,7 +44,13 @@
   "channels": [
     {
       "id": "skyDe",
-      "courses": ["react", "js", "ts", "interview", "testing"]
+      "courses": [
+        "react",
+        "js",
+        "ts",
+        "interview",
+        "testing"
+      ]
     }
   ],
   "colors": [
