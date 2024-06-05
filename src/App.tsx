@@ -11,6 +11,7 @@ import SuperHeroDetails from "./pages/SuperHeroDetails";
 import ParallelRQ from "./pages/ParallelRQ";
 import DependedQueries from "./pages/DependedQueries";
 import PaginatedColors from "./pages/PaginatedColors";
+import InfiniteColors from "./pages/InfiniteColors";
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ function App() {
             <Route path="/super-heroes" element={<SuperHeroes />} />
             <Route path="/paginated-colors" element={<PaginatedColors />} />
             <Route path="/rq-parallel" element={<ParallelRQ />} />
+            <Route path="/rq-infinite" element={<InfiniteColors />} />
             <Route
               path="/depended-queries"
               element={<DependedQueries email="sky@example.com" />}

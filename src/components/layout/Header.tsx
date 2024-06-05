@@ -25,6 +25,9 @@ const Header: FC = () => {
           <li>
             <Link to="/paginated-colors">Paginated-Colors</Link>
           </li>
+          <li>
+            <Link to="/rq-infinite">RQ-Infinite-Q</Link>
+          </li>
         </ul>
       </nav>
     </header>
