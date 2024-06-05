@@ -22,17 +22,43 @@ export const usePostSuperhero = () => {
   const [newHero, setNewHero] = useState<NewHeroType>(initialNewHero);
   const queryClient = useQueryClient();
   const { mutate: addHero, ...restMutaionRes } = useMutation(addSuperhero, {
-    onSuccess: (data) => {
-      // queryClient.invalidateQueries("super-heroes");
-      // // updating existing cached query data without
-      // // additional network request using queryClient.setQueryData and
-      // // returned new hero obj by mutate
-      queryClient.setQueryData("super-heroes", (oldQueryData) => {
+    // onSuccess: (data) => {
+    //   // // invalidates super-heroes query so it will
+    //   // // automatically refetch again
+    //   // queryClient.invalidateQueries("super-heroes");
+    //   // // updating existing cached query data without
+    //   // // additional network request using queryClient.setQueryData and
+    //   // // returned new hero obj by mutate
+    //   queryClient.setQueryData("super-heroes", (oldQueryData) => {
+    //     return {
+    //       ...oldQueryData,
+    //       data: [...oldQueryData.data, data.data],
+    //     };
+    //   });
+    // },
+
+    // // Optimistic Updates
+    onMutate: async (newHero) => {
+      await queryClient.cancelQueries("super-heroes");
+      const preHeroData = queryClient.getQueriesData("super-heroes");
+      queryClient.setQueryData("super-heroes", (oldQueryData: any) => {
         return {
           ...oldQueryData,
-          data: [...oldQueryData.data, data.data],
+          data: [
+            ...oldQueryData.data,
+            { id: oldQueryData?.data.length + 1, ...newHero },
+          ],
         };
       });
+      return {
+        preHeroData,
+      };
+    },
+    onError: (_error, _hero, context) => {
+      queryClient.setQueryData("super-heroes", context?.preHeroData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries("super-heroes");
     },
   });
 
